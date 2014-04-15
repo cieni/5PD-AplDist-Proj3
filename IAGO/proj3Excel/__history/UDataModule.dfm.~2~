@@ -1,0 +1,20 @@
+object DataModule1: TDataModule1
+  OldCreateOrder = False
+  Height = 173
+  Width = 259
+  object ADOConnection1: TADOConnection
+    ConnectionString = 
+      'Provider=SQLNCLI11.1;Integrated Security="";Persist Security Inf' +
+      'o=False;User ID=BD12175;Initial Catalog=BD12175;Data Source=REGU' +
+      'LUS;Initial File Name="";Server SPN=""'
+    Provider = 'SQLNCLI11.1'
+    Left = 48
+    Top = 16
+  end
+  object ADOQuery1: TADOQuery
+    Connection = ADOConnection1
+    Parameters = <>
+    Left = 136
+    Top = 24
+  end
+end

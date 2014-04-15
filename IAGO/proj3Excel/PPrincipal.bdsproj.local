@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2014/04/12 22:20:19.256.pas,F:\5º Semestre\Aplicações Distribuídas Orientadas a Serviços\proj3Excel\Unit2.pas=F:\5º Semestre\Aplicações Distribuídas Orientadas a Serviços\proj3Excel\UProfessor.pas</Transaction>
+    <Transaction>2014/04/12 22:20:19.256.dfm,F:\5º Semestre\Aplicações Distribuídas Orientadas a Serviços\proj3Excel\Unit2.dfm=F:\5º Semestre\Aplicações Distribuídas Orientadas a Serviços\proj3Excel\UProfessor.dfm</Transaction>
+    <Transaction>2014/04/12 22:27:07.072.pas,F:\5º Semestre\Aplicações Distribuídas Orientadas a Serviços\proj3Excel\Unit2.pas=F:\5º Semestre\Aplicações Distribuídas Orientadas a Serviços\proj3Excel\UTurma.pas</Transaction>
+    <Transaction>2014/04/12 22:27:07.072.dfm,F:\5º Semestre\Aplicações Distribuídas Orientadas a Serviços\proj3Excel\Unit2.dfm=F:\5º Semestre\Aplicações Distribuídas Orientadas a Serviços\proj3Excel\UTurma.dfm</Transaction>
+    <Transaction>2014/04/12 23:47:22.875.pas,F:\5º Semestre\Aplicações Distribuídas Orientadas a Serviços\proj3Excel\Unit2.pas=F:\5º Semestre\Aplicações Distribuídas Orientadas a Serviços\proj3Excel\UDiario.pas</Transaction>
+    <Transaction>2014/04/12 23:47:22.875.dfm,F:\5º Semestre\Aplicações Distribuídas Orientadas a Serviços\proj3Excel\Unit2.dfm=F:\5º Semestre\Aplicações Distribuídas Orientadas a Serviços\proj3Excel\UDiario.dfm</Transaction>
+  </Transactions>
+</BorlandProject>

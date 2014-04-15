@@ -1,0 +1,53 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Di'#225'rio'
+  ClientHeight = 318
+  ClientWidth = 515
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  Menu = MainMenu1
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object MainMenu1: TMainMenu
+    Left = 320
+    Top = 192
+    object Cadastro1: TMenuItem
+      Caption = 'Cadastro'
+      object Aluno1: TMenuItem
+        Caption = 'Aluno'
+        OnClick = Aluno1Click
+      end
+      object Curso1: TMenuItem
+        Caption = 'Curso'
+        OnClick = Curso1Click
+      end
+      object Dirio2: TMenuItem
+        Caption = 'Di'#225'rio'
+      end
+      object Disciplina1: TMenuItem
+        Caption = 'Disciplina'
+        OnClick = Disciplina1Click
+      end
+      object Professor1: TMenuItem
+        Caption = 'Professor'
+        OnClick = Professor1Click
+      end
+      object urma1: TMenuItem
+        Caption = 'Turma'
+        OnClick = urma1Click
+      end
+    end
+    object Dirio1: TMenuItem
+      Caption = 'Di'#225'rio'
+    end
+    object Sair1: TMenuItem
+      Caption = 'Sair'
+    end
+  end
+end
