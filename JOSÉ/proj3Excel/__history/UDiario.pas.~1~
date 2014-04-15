@@ -1,0 +1,24 @@
+unit UDiario;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs;
+
+type
+  TfrmDiario = class(TForm)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmDiario: TfrmDiario;
+
+implementation
+
+{$R *.dfm}
+
+end.
