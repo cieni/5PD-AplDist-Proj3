@@ -62,8 +62,8 @@ begin
   DM.ADOBD.Open;
   While not(DM.ADOBD.Eof) do
   Begin
-    codTurma := DM.ADOBD.FieldByName('codigoTurma').AsString;
-    ra       := DM.ADOBD.FieldByName('ra').AsString;
+    codTurma := DM.ADOBD.FieldByName('codigoTurma').ToString;
+    ra       := DM.ADOBD.FieldByName('ra').ToString;
     lbDiarios.Items.Add('Turma '+codTurma+' - '+pegarNomeAluno(ra));
     DM.ADOBD.Next;
   End;
@@ -132,7 +132,7 @@ begin
    DM.ADOAux.Open;
    if not(DM.ADOAux.Eof) then
    Begin
-    result := DM.ADOAux.FieldByName('nome').AsString;
+    result := DM.ADOAux.FieldByName('nome').ToString;
    End
    else
     result := '';

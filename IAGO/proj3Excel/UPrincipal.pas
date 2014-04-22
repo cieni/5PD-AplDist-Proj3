@@ -53,8 +53,8 @@ end;
 
 procedure TfrmPrincipal.Dirio2Click(Sender: TObject);
 begin
-Application.CreateForm(TfrmDiario, frmDiario);
-frmDiario.show;
+Application.CreateForm(TfrmDiarios, frmDiarios);
+frmDiarios.show;
 end;
 
 procedure TfrmPrincipal.Disciplina1Click(Sender: TObject);

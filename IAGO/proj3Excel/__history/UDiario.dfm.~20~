@@ -64,20 +64,20 @@ object frmDiarios: TfrmDiarios
     TabOrder = 1
   end
   object cbTurma: TComboBox
-    Left = 92
-    Top = 10
-    Width = 331
-    Height = 21
+    Left = 84
+    Top = 8
+    Width = 311
+    Height = 26
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -11
+    Font.Height = 18
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
     TabOrder = 2
   end
   object cbAluno: TComboBox
-    Left = 95
+    Left = 112
     Top = 66
     Width = 193
     Height = 26

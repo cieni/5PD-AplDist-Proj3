@@ -119,7 +119,7 @@
             <Form>frmTurma</Form>
         </DCCReference>
         <DCCReference Include="UDiario.pas">
-            <Form>frmDiario</Form>
+            <Form>frmDiarios</Form>
         </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

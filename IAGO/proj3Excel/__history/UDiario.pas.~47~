@@ -132,7 +132,7 @@ begin
    DM.ADOAux.Open;
    if not(DM.ADOAux.Eof) then
    Begin
-    result := DM.ADOAux.FieldByName('nome').AsString;
+    result := DM.ADOAux.FieldByName('nome').ToString;
    End
    else
     result := '';
