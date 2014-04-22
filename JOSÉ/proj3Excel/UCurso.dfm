@@ -36,7 +36,8 @@ object frmCurso: TfrmCurso
     Top = 8
     Width = 70
     Height = 21
-    MaxLength = 3
+    MaxLength = 2
+    NumbersOnly = True
     TabOrder = 0
   end
   object edNome: TEdit

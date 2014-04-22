@@ -1,0 +1,93 @@
+object frmTurma: TfrmTurma
+  Left = 0
+  Top = 0
+  Caption = 'Turmas'
+  ClientHeight = 712
+  ClientWidth = 574
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object lblCurso: TLabel
+    Left = 55
+    Top = 167
+    Width = 35
+    Height = 13
+    Caption = 'Curso:'
+  end
+  object lblDisciplina: TLabel
+    Left = 20
+    Top = 215
+    Width = 50
+    Height = 13
+    Caption = 'Disciplina:'
+  end
+  object lblProfessor: TLabel
+    Left = 25
+    Top = 114
+    Width = 53
+    Height = 13
+    Caption = 'Professor:'
+  end
+  object lblPeriodo: TLabel
+    Left = 76
+    Top = 69
+    Width = 43
+    Height = 13
+    Caption = 'Per'#237'odo:'
+  end
+  object btnIncluir: TButton
+    Left = 216
+    Top = 264
+    Width = 121
+    Height = 30
+    Caption = 'incluir'
+    TabOrder = 0
+    OnClick = btnIncluirClick
+  end
+  object lbTurmas: TListBox
+    Left = 24
+    Top = 308
+    Width = 528
+    Height = 394
+    ItemHeight = 13
+    TabOrder = 1
+  end
+  object cbProfessor: TComboBox
+    Left = 125
+    Top = 120
+    Width = 145
+    Height = 21
+    TabOrder = 2
+  end
+  object cbCurso: TComboBox
+    Left = 125
+    Top = 173
+    Width = 145
+    Height = 21
+    TabOrder = 3
+  end
+  object cbDisciplina: TComboBox
+    Left = 125
+    Top = 221
+    Width = 145
+    Height = 21
+    TabOrder = 4
+  end
+  object sePeriodo: TSpinEdit
+    Left = 125
+    Top = 66
+    Width = 41
+    Height = 22
+    MaxValue = 40
+    MinValue = 1
+    TabOrder = 5
+    Value = 1
+  end
+end

@@ -36,7 +36,7 @@ object frmDisciplina: TfrmDisciplina
     Top = 8
     Width = 70
     Height = 21
-    MaxLength = 3
+    MaxLength = 5
     TabOrder = 0
   end
   object edNome: TEdit

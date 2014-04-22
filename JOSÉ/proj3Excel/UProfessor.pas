@@ -8,13 +8,11 @@ uses
 
 type
   TfrmProfessor = class(TForm)
-    Label1: TLabel;
-    Label2: TLabel;
-    edCodigo: TEdit;
+    lblNome: TLabel;
     edNome: TEdit;
-    Button1: TButton;
+    btnIncluir: TButton;
     lbProfessores: TListBox;
-    procedure Button1Click(Sender: TObject);
+    procedure btnIncluirClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
     procedure atualizarLista;
@@ -46,10 +44,10 @@ begin
   End;
 end;
 
-procedure TfrmProfessor.Button1Click(Sender: TObject);
+procedure TfrmProfessor.btnIncluirClick(Sender: TObject);
 begin
   DM.ADOBD.SQL.Clear;
-  DM.ADOBD.SQL.Add('insert into DProfessor values('+quotedStr(edCodigo.Text)+','+quotedStr(edNome.Text)+')');
+  DM.ADOBD.SQL.Add('insert into DProfessor values('+quotedStr(edNome.Text)+')');
   Dm.ADOBD.execSQL;
   showMessage('Professor incluído com sucesso');
   atualizarLista;

@@ -1,9 +1,11 @@
 object frmProfessor: TfrmProfessor
   Left = 0
   Top = 0
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsSingle
   Caption = 'Professores'
-  ClientHeight = 429
-  ClientWidth = 437
+  ClientHeight = 297
+  ClientWidth = 465
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,84 +13,40 @@ object frmProfessor: TfrmProfessor
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Visible = True
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
-  object Label1: TLabel
-    Left = 11
-    Top = 15
-    Width = 73
-    Height = 31
-    Caption = 'C'#243'digo :'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = 32
-    Font.Name = 'Shonar Bangla'
-    Font.Style = [fsBold]
-    ParentFont = False
-  end
-  object Label2: TLabel
-    Left = 22
-    Top = 71
-    Width = 62
-    Height = 31
-    Caption = 'Nome :'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = 32
-    Font.Name = 'Shonar Bangla'
-    Font.Style = [fsBold]
-    ParentFont = False
-  end
-  object edCodigo: TEdit
-    Left = 90
-    Top = 8
-    Width = 97
-    Height = 33
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -19
-    Font.Name = 'Shonar Bangla'
-    Font.Style = []
-    MaxLength = 3
-    ParentFont = False
-    TabOrder = 0
+  object lblNome: TLabel
+    Left = 8
+    Top = 11
+    Width = 31
+    Height = 13
+    Caption = 'Nome:'
   end
   object edNome: TEdit
-    Left = 90
-    Top = 72
-    Width = 271
-    Height = 33
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -19
-    Font.Name = 'Shonar Bangla'
-    Font.Style = []
+    Left = 45
+    Top = 8
+    Width = 345
+    Height = 21
     MaxLength = 30
-    ParentFont = False
-    TabOrder = 1
+    TabOrder = 0
   end
-  object Button1: TButton
-    Left = 136
-    Top = 120
-    Width = 121
-    Height = 30
-    Caption = 'Incluir'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -19
-    Font.Name = 'Shonar Bangla'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 2
-    OnClick = Button1Click
+  object btnIncluir: TButton
+    Left = 396
+    Top = 6
+    Width = 61
+    Height = 25
+    Caption = 'incluir'
+    TabOrder = 1
+    OnClick = btnIncluirClick
   end
   object lbProfessores: TListBox
-    Left = 10
-    Top = 168
-    Width = 415
-    Height = 257
+    Left = 8
+    Top = 35
+    Width = 449
+    Height = 254
     ItemHeight = 13
-    TabOrder = 3
+    TabOrder = 2
   end
 end

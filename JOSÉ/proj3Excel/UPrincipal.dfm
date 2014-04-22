@@ -10,7 +10,6 @@ object frmPrincipal: TfrmPrincipal
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
-  FormStyle = fsNormal
   Menu = MainMenu1
   OldCreateOrder = False
   Visible = True
@@ -48,6 +47,7 @@ object frmPrincipal: TfrmPrincipal
     end
     object Dirio1: TMenuItem
       Caption = 'Di'#225'rio'
+      OnClick = Dirio1Click
     end
     object Sair1: TMenuItem
       Caption = 'Sair'
