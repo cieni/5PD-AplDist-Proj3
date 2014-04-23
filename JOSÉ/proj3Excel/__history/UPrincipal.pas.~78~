@@ -77,8 +77,8 @@ end;
 
 procedure TfrmPrincipal.Dirio2Click(Sender: TObject);
 begin
-  Application.CreateForm(TfrmDiarios, frmDiarios);
-  frmDiarios.Show;
+  Application.CreateForm(TfrmDiario, frmDiario);
+  frmDiario.Show;
 end;
 
 procedure TfrmPrincipal.Disciplina1Click(Sender: TObject);

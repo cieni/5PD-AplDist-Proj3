@@ -181,6 +181,12 @@ begin
     vData.Value := 'Per:';
 
     // mesclagem de células
+    vExcel.Range['AP3:AY3'].MergeCells := True;
+
+    vExcel.Range['N3:Q3'].MergeCells := True;
+    vExcel.Range['N3:Q3'].Cells.HorizontalAlignment := 3;
+    vExcel.Range['N3'].Value := '2014';
+
     vExcel.Range['C6', 'C7'].MergeCells := True;
     vExcel.Range['D6', 'D7'].MergeCells := True;
     vExcel.Range['E6', 'E7'].MergeCells := True;
@@ -253,7 +259,7 @@ begin
       vExcel.Cells[5, I + 2].Value := I; // linha, coluna
     end;
 
-    with DM.ADOAux do
+    with DM.ADOBD do
     begin
       SQL.Clear;
       SQL.Add('SELECT codigoCurso, codigoDisciplina disc FROM DTurma WHERE codigoTurma = ' + QuotedStr((lsbTurma.Items.Objects[lsbTurma.ItemIndex] as TStr).str) +  ' ');
@@ -265,6 +271,11 @@ begin
 
         vExcel.Range['B4'].Font.Bold := True;
         vExcel.Range['B4'].Value := FieldByName('disc').AsString + ' - ' + pegarNomeBD('DDisciplina', FieldByName('disc').AsString);
+
+        vExcel.Range['AP3'].Font.Bold := True;
+        vExcel.Range['AP3'].Value := FieldByName('periodo').AsString + ' / 2014';
+
+        vExcel.Range['AG4'].Value := pegarNomeBD('DProfessor', FieldByName('codigoProfessor').AsString);
 
         Next;
       end;

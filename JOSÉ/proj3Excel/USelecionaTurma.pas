@@ -74,6 +74,7 @@ begin
     result := DM.ADOAux.FieldByName('nome').AsString;
     DM.ADOAux.Next;
   End;
+  DM.ADOAux.Close;
 
 end;
 
@@ -262,7 +263,7 @@ begin
     with DM.ADOBD do
     begin
       SQL.Clear;
-      SQL.Add('SELECT codigoCurso, codigoDisciplina disc FROM DTurma WHERE codigoTurma = ' + QuotedStr((lsbTurma.Items.Objects[lsbTurma.ItemIndex] as TStr).str) +  ' ');
+      SQL.Add('SELECT codigoCurso, codigoProfessor, codigoDisciplina disc, periodo FROM DTurma WHERE codigoTurma = ' + QuotedStr((lsbTurma.Items.Objects[lsbTurma.ItemIndex] as TStr).str) +  ' ');
       Open;
 
       while not Eof do
@@ -272,6 +273,7 @@ begin
         vExcel.Range['B4'].Font.Bold := True;
         vExcel.Range['B4'].Value := FieldByName('disc').AsString + ' - ' + pegarNomeBD('DDisciplina', FieldByName('disc').AsString);
 
+        vExcel.Range['AP3'].NumberFormat := '@';
         vExcel.Range['AP3'].Font.Bold := True;
         vExcel.Range['AP3'].Value := FieldByName('periodo').AsString + ' / 2014';
 
