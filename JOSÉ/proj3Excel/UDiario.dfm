@@ -11,12 +11,13 @@ object frmDiario: TfrmDiario
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
     Left = 30
     Top = 34
-    Width = 75
+    Width = 72
     Height = 31
     Caption = 'Turma :'
     Font.Charset = DEFAULT_CHARSET
@@ -53,10 +54,10 @@ object frmDiario: TfrmDiario
     ParentFont = False
     TabOrder = 0
   end
-  object lbDisciplinas: TListBox
+  object lbDiarios: TListBox
     Left = 8
     Top = 208
-    Width = 415
+    Width = 425
     Height = 257
     ItemHeight = 13
     TabOrder = 1
@@ -71,7 +72,6 @@ object frmDiario: TfrmDiario
     Font.Height = 18
     Font.Name = 'Tahoma'
     Font.Style = []
-    ItemHeight = 18
     ParentFont = False
     TabOrder = 2
   end
@@ -85,7 +85,6 @@ object frmDiario: TfrmDiario
     Font.Height = 18
     Font.Name = 'Tahoma'
     Font.Style = []
-    ItemHeight = 18
     ParentFont = False
     TabOrder = 3
   end

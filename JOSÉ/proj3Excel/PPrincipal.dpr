@@ -10,6 +10,7 @@ uses
   UDisciplina in 'UDisciplina.pas' {frmDisciplina},
   UProfessor in 'UProfessor.pas' {frmProfessor},
   UTurma in 'UTurma.pas' {frmTurma},
+  USelecionaTurma in 'USelecionaTurma.pas' {frmSelecionaTurma},
   UDiario in 'UDiario.pas' {frmDiario};
 
 {$R *.res}

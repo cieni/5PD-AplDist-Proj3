@@ -1,0 +1,76 @@
+object frmSelecionaTurma: TfrmSelecionaTurma
+  Left = 0
+  Top = 0
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsSingle
+  Caption = 'Di'#225'rio de Classe - Sele'#231#227'o de Turma'
+  ClientHeight = 329
+  ClientWidth = 353
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Visible = True
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object lblProfessor: TLabel
+    Left = 8
+    Top = 38
+    Width = 50
+    Height = 13
+    Caption = 'Professor:'
+  end
+  object lblCurso: TLabel
+    Left = 8
+    Top = 11
+    Width = 32
+    Height = 13
+    Caption = 'Curso:'
+  end
+  object lblTurma: TLabel
+    Left = 8
+    Top = 65
+    Width = 34
+    Height = 13
+    Caption = 'Turma:'
+  end
+  object cbCurso: TComboBox
+    Left = 46
+    Top = 8
+    Width = 299
+    Height = 21
+    Style = csDropDownList
+    TabOrder = 0
+    OnChange = cbProfessorChange
+  end
+  object cbProfessor: TComboBox
+    Left = 64
+    Top = 35
+    Width = 281
+    Height = 21
+    Style = csDropDownList
+    TabOrder = 1
+    OnChange = cbProfessorChange
+  end
+  object lsbTurma: TListBox
+    Left = 8
+    Top = 84
+    Width = 337
+    Height = 208
+    ItemHeight = 13
+    TabOrder = 2
+  end
+  object btnGerar: TButton
+    Left = 256
+    Top = 298
+    Width = 89
+    Height = 25
+    Caption = 'Gerar di'#225'rio'
+    TabOrder = 3
+    OnClick = btnGerarClick
+  end
+end

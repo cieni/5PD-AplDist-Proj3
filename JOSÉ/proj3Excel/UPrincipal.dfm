@@ -31,6 +31,7 @@ object frmPrincipal: TfrmPrincipal
       end
       object Dirio2: TMenuItem
         Caption = 'Di'#225'rio'
+        OnClick = Dirio2Click
       end
       object Disciplina1: TMenuItem
         Caption = 'Disciplina'

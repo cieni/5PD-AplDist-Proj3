@@ -147,7 +147,7 @@ begin
 
     {tudo := 'Turma ' + turma + ' -Curso ' + curso + ' -Disciplina ' + disciplina
       + ' -Periodo ' + periodo + ' -Professor ' + professor;}
-    tudo := curso + ' ' + cursoN + ' - ' + periodo + 'º período - ' + disciplina + ' ' + disciplinaN + ' (' + professor + ')';
+    tudo := curso + ' ' + cursoN + ' - ' + periodo + 'º Período - ' + disciplina + ' ' + disciplinaN + ' (' + professor + ')';
     lbTurmas.Items.Add(tudo);
     DM.ADOBD.Next;
   End;

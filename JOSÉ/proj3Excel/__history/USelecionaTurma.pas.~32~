@@ -1,0 +1,307 @@
+unit USelecionaTurma;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics, ComObj,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  TStr = class
+  public
+    str: String;
+    constructor criar(s: String);
+  end;
+
+  TfrmSelecionaTurma = class(TForm)
+    lblProfessor: TLabel;
+    lblCurso: TLabel;
+    lblTurma: TLabel;
+    cbCurso: TComboBox;
+    cbProfessor: TComboBox;
+    lsbTurma: TListBox;
+    btnGerar: TButton;
+    procedure FormCreate(Sender: TObject);
+    procedure btnGerarClick(Sender: TObject);
+    procedure cbProfessorChange(Sender: TObject);
+  private
+    procedure popularProfessores;
+    procedure popularTurmas;
+    procedure popularCursos;
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmSelecionaTurma: TfrmSelecionaTurma;
+
+implementation
+
+{$R *.dfm}
+
+uses UDataModule;
+
+procedure TfrmSelecionaTurma.popularProfessores;
+begin
+  cbProfessor.Items.Clear;
+
+  with DM.ADOBD do
+  begin
+    SQL.Clear;
+    SQL.Add('SELECT * FROM DProfessor ORDER BY nome');
+    Open;
+
+    while not Eof do
+    begin
+      cbProfessor.Items.AddObject(FieldByName('nome').AsString,
+        TStr.criar(FieldByName('codigo').AsString));
+      Next;
+    end;
+    Close;
+  end;
+end;
+
+function pegarNomeBD(tabela, codigo: String): String;
+begin
+  DM.ADOAux.SQL.Clear;
+  DM.ADOAux.SQL.Add('Select * from ' + tabela + ' where codigo=' +
+    quotedStr(codigo));
+  DM.ADOAux.Open;
+  while not(DM.ADOAux.Eof) do
+  Begin
+    result := DM.ADOAux.FieldByName('nome').AsString;
+    DM.ADOAux.Next;
+  End;
+
+end;
+
+procedure TfrmSelecionaTurma.popularCursos;
+begin
+  cbCurso.Items.Clear;
+
+  with DM.ADOBD do
+  begin
+    SQL.Clear;
+    SQL.Add('SELECT * FROM DCurso ORDER BY nome');
+    Open;
+
+    while not Eof do
+    begin
+      cbCurso.Items.AddObject(FieldByName('codigo').AsString + ' ' +
+        FieldByName('nome').AsString,
+        TStr.criar(FieldByName('codigo').AsString));
+      Next;
+    end;
+    Close;
+  end;
+
+end;
+
+procedure TfrmSelecionaTurma.popularTurmas;
+begin
+  lsbTurma.Items.Clear;
+
+  if (cbCurso.ItemIndex >= 0) and (cbProfessor.ItemIndex >= 0) then
+  begin
+    with DM.ADOAux do
+    begin
+      SQL.Clear;
+      SQL.Add('SELECT t.codigoTurma cod, periodo, d.nome disciplina FROM DTurma t INNER JOIN DDisciplina d ON t.codigoDisciplina = d.codigo WHERE codigoProfessor = '
+        + QuotedStr((cbProfessor.Items.Objects[cbProfessor.ItemIndex] as TStr)
+        .str) + ' AND codigoCurso = ' +
+        QuotedStr((cbCurso.Items.Objects[cbCurso.ItemIndex] as TStr).str) +
+        ' ORDER BY periodo, disciplina');
+      Open;
+
+      while not Eof do
+      begin
+        lsbTurma.Items.AddObject(FieldByName('periodo').AsString +
+          'º Período - ' + FieldByName('disciplina').AsString,
+          TStr.criar(FieldByName('cod').AsString));
+        Next;
+      end;
+      Close;
+    end;
+  end;
+
+end;
+
+procedure TfrmSelecionaTurma.btnGerarClick(Sender: TObject);
+var
+  vData, vExcel: Variant;
+  I: Integer;
+begin
+  if lsbTurma.ItemIndex >= 0 then
+  begin
+    vExcel := CreateOLEObject('Excel.Application');
+    vExcel.WorkBooks.Add;
+    vExcel.Visible := True;
+
+    // células congeladas
+    vExcel.Range['C8'].Activate;
+    vExcel.Application.ActiveWindow.FreezePanes := True;
+
+    // células giradas
+    vExcel.Range['C5:AX7'].Orientation := 90;
+
+    // largura das colunas
+    vExcel.Columns['A'].ColumnWidth := 5.86;
+    vExcel.Columns['AY'].ColumnWidth := 5.86;
+    vExcel.Columns['B'].ColumnWidth := 46.29;
+    vExcel.Columns['C:AX'].ColumnWidth := 1.57;
+    vExcel.Columns['AZ:BC'].ColumnWidth := 3.57;
+    vExcel.Columns['BD:BD'].ColumnWidth := 4.71;
+    vExcel.Columns['BE:BE'].ColumnWidth := 4.14;
+
+    // textos estáticos
+    vData := vExcel.Range['K1'];
+    vData.Font.Bold := True;
+    vData.Value := 'Colégio Técnico de Campinas';
+
+    vData := vExcel.Range['B5'];
+    vData.Font.Bold := True;
+    vData.Value := 'Aulas Previstas: ';
+
+    vData := vExcel.Range['B6'];
+    vData.Font.Bold := True;
+    vData.Value := 'Aulas Dadas: ';
+
+    vData := vExcel.Range['J3'];
+    vData.Font.Bold := True;
+    vData.Value := 'Curríc:';
+
+    vData := vExcel.Range['AA4'];
+    vData.Font.Bold := True;
+    vData.Value := 'Professor:';
+
+    vData := vExcel.Range['AM3'];
+    vData.Font.Bold := True;
+    vData.Value := 'Per:';
+
+    // mesclagem de células
+    vExcel.Range['C6', 'C7'].MergeCells := True;
+    vExcel.Range['D6', 'D7'].MergeCells := True;
+    vExcel.Range['E6', 'E7'].MergeCells := True;
+    vExcel.Range['F6', 'F7'].MergeCells := True;
+    vExcel.Range['G6', 'G7'].MergeCells := True;
+    vExcel.Range['H6', 'H7'].MergeCells := True;
+    vExcel.Range['I6', 'I7'].MergeCells := True;
+    vExcel.Range['J6', 'J7'].MergeCells := True;
+    vExcel.Range['K6', 'K7'].MergeCells := True;
+    vExcel.Range['L6', 'L7'].MergeCells := True;
+    vExcel.Range['M6', 'M7'].MergeCells := True;
+    vExcel.Range['N6', 'N7'].MergeCells := True;
+    vExcel.Range['O6', 'O7'].MergeCells := True;
+    vExcel.Range['P6', 'P7'].MergeCells := True;
+    vExcel.Range['Q6', 'Q7'].MergeCells := True;
+    vExcel.Range['R6', 'R7'].MergeCells := True;
+    vExcel.Range['S6', 'S7'].MergeCells := True;
+    vExcel.Range['T6', 'T7'].MergeCells := True;
+    vExcel.Range['U6', 'U7'].MergeCells := True;
+    vExcel.Range['V6', 'V7'].MergeCells := True;
+    vExcel.Range['W6', 'W7'].MergeCells := True;
+    vExcel.Range['X6', 'X7'].MergeCells := True;
+    vExcel.Range['Y6', 'Y7'].MergeCells := True;
+    vExcel.Range['Z6', 'Z7'].MergeCells := True;
+    vExcel.Range['AA6', 'AA7'].MergeCells := True;
+    vExcel.Range['AB6', 'AB7'].MergeCells := True;
+    vExcel.Range['AC6', 'AC7'].MergeCells := True;
+    vExcel.Range['AD6', 'AD7'].MergeCells := True;
+    vExcel.Range['AE6', 'AE7'].MergeCells := True;
+    vExcel.Range['AF6', 'AF7'].MergeCells := True;
+    vExcel.Range['AG6', 'AG7'].MergeCells := True;
+    vExcel.Range['AH6', 'AH7'].MergeCells := True;
+    vExcel.Range['AI6', 'AI7'].MergeCells := True;
+    vExcel.Range['AJ6', 'AJ7'].MergeCells := True;
+    vExcel.Range['AK6', 'AK7'].MergeCells := True;
+    vExcel.Range['AL6', 'AL7'].MergeCells := True;
+    vExcel.Range['AM6', 'AM7'].MergeCells := True;
+    vExcel.Range['AN6', 'AN7'].MergeCells := True;
+    vExcel.Range['AO6', 'AO7'].MergeCells := True;
+    vExcel.Range['AP6', 'AP7'].MergeCells := True;
+    vExcel.Range['AQ6', 'AQ7'].MergeCells := True;
+    vExcel.Range['AR6', 'AR7'].MergeCells := True;
+    vExcel.Range['AS6', 'AS7'].MergeCells := True;
+    vExcel.Range['AT6', 'AT7'].MergeCells := True;
+    vExcel.Range['AU6', 'AU7'].MergeCells := True;
+    vExcel.Range['AV6', 'AV7'].MergeCells := True;
+    vExcel.Range['AW6', 'AW7'].MergeCells := True;
+    vExcel.Range['AX6', 'AX7'].MergeCells := True;
+    vExcel.Range['AY6', 'AY7'].MergeCells := True;
+    vExcel.Range['AZ6', 'AZ7'].MergeCells := True;
+    vExcel.Range['BA6', 'BA7'].MergeCells := True;
+    vExcel.Range['BB6', 'BB7'].MergeCells := True;
+    vExcel.Range['BC6', 'BC7'].MergeCells := True;
+    vExcel.Range['BD6', 'BD7'].MergeCells := True;
+    vExcel.Range['BE6', 'BE7'].MergeCells := True;
+
+    vExcel.Range['AZ5:BC5'].MergeCells := True;
+    vData := vExcel.Range['AZ5'];
+    vData.Value := 'Avaliações';
+    vData.Font.Bold := True;
+    vData.Cells.HorizontalAlignment := 3;
+
+    vData := vExcel.Range['AY6'];
+    vData.Value := 'RA';
+    vData.Font.Bold := True;
+    vData.Cells.HorizontalAlignment := 3;
+
+    for I := 1 to 48 do
+    begin
+      vExcel.Cells[5, I + 2].Value := I; // linha, coluna
+    end;
+
+    with DM.ADOAux do
+    begin
+      SQL.Clear;
+      SQL.Add('SELECT codigoCurso, codigoDisciplina FROM DTurma WHERE codigoTurma = ' + QuotedStr((lsbTurma.Items.Objects[lsbTurma.ItemIndex] as TStr).str) +  ' ');
+      Open;
+
+      while not Eof do
+      begin
+        vExcel.Range['B3'].Value := FieldByName('codigoCurso').AsString + ' - ' + pegarNomeBD('DCurso', FieldByName('codigoCurso').AsString);
+
+        vExcel.Range['B4'].Font.Bold := True;
+        vExcel.Range['B4'].Value := FieldByName('codigoDisciplina').AsString + ' - ' + pegarNomeBD('DDisciplina', FieldByName('codigoDisciplina').AsString);
+
+        Next;
+      end;
+      Close;
+
+    end;
+
+    { vData := varArrayOf(['cotuca', 'terça-feira', 'Até Breve', 'Soma']);
+      vExcel.Range['A2:D2'].value := vData;
+      vExcel.Range['D2'].Font.Color := clRed;
+
+      vData := varArrayOf(['10', '20', '30', '=sum(A3:C3)']);
+      vExcel.Range['A3:d3'].value := vData; }
+
+    vExcel.Quit;
+  end
+  else
+    ShowMessage('Selecione uma turma para prosseguir!');
+end;
+
+procedure TfrmSelecionaTurma.cbProfessorChange(Sender: TObject);
+begin
+  popularTurmas;
+end;
+
+procedure TfrmSelecionaTurma.FormCreate(Sender: TObject);
+begin
+  popularProfessores;
+  popularCursos;
+  popularTurmas;
+end;
+
+{ TStr }
+
+constructor TStr.criar(s: String);
+begin
+  str := s;
+end;
+
+end.

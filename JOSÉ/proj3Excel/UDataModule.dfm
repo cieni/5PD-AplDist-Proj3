@@ -4,8 +4,8 @@ object DM: TDM
   Width = 259
   object ADOConnection1: TADOConnection
     ConnectionString = 
-      'Provider=SQLOLEDB.1;Password=BD12175;Persist Security Info=True;' +
-      'User ID=BD12175;Initial Catalog=BD12175;Data Source=REGULUS'
+      'Provider=SQLOLEDB.1;Password=xpto;Persist Security Info=True;Use' +
+      'r ID=sa;Initial Catalog=AplDist;Data Source=.\SQLEXPRESS'
     LoginPrompt = False
     Provider = 'SQLOLEDB.1'
     Left = 48
