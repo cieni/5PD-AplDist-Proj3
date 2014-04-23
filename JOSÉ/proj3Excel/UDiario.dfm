@@ -1,4 +1,4 @@
-object frmDiario: TfrmDiario
+object frmDiarios: TfrmDiarios
   Left = 0
   Top = 0
   Caption = 'Di'#225'rio'
@@ -15,8 +15,8 @@ object frmDiario: TfrmDiario
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
-    Left = 30
-    Top = 34
+    Left = 14
+    Top = 8
     Width = 72
     Height = 31
     Caption = 'Turma :'
@@ -28,8 +28,8 @@ object frmDiario: TfrmDiario
     ParentFont = False
   end
   object Label2: TLabel
-    Left = 41
-    Top = 90
+    Left = 25
+    Top = 64
     Width = 64
     Height = 31
     Caption = 'Aluno :'
@@ -42,7 +42,7 @@ object frmDiario: TfrmDiario
   end
   object Button1: TButton
     Left = 144
-    Top = 160
+    Top = 104
     Width = 121
     Height = 30
     Caption = 'Incluir'
@@ -53,31 +53,32 @@ object frmDiario: TfrmDiario
     Font.Style = []
     ParentFont = False
     TabOrder = 0
+    OnClick = Button1Click
   end
   object lbDiarios: TListBox
     Left = 8
-    Top = 208
-    Width = 425
-    Height = 257
+    Top = 160
+    Width = 415
+    Height = 305
     ItemHeight = 13
     TabOrder = 1
   end
   object cbTurma: TComboBox
-    Left = 128
-    Top = 40
-    Width = 193
-    Height = 26
+    Left = 92
+    Top = 10
+    Width = 331
+    Height = 21
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = 18
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
     TabOrder = 2
   end
   object cbAluno: TComboBox
-    Left = 128
-    Top = 92
+    Left = 95
+    Top = 66
     Width = 193
     Height = 26
     Font.Charset = DEFAULT_CHARSET
