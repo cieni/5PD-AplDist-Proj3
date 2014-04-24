@@ -63,6 +63,19 @@ begin
   end;
 end;
 
+function pegarNomeAluno(ra: string): String;
+begin
+  DM.ADOAux.SQL.Clear;
+  DM.ADOAux.SQL.Add('select nome from DAluno where ra=' + quotedStr(ra));
+  DM.ADOAux.Open;
+  if not(DM.ADOAux.Eof) then
+  Begin
+    result := DM.ADOAux.FieldByName('nome').AsString;
+  End
+  else
+    result := '';
+end;
+
 function pegarNomeBD(tabela, codigo: String): String;
 begin
   DM.ADOAux.SQL.Clear;
@@ -110,9 +123,9 @@ begin
     begin
       SQL.Clear;
       SQL.Add('SELECT t.codigoTurma cod, periodo, d.nome disciplina FROM DTurma t INNER JOIN DDisciplina d ON t.codigoDisciplina = d.codigo WHERE codigoProfessor = '
-        + QuotedStr((cbProfessor.Items.Objects[cbProfessor.ItemIndex] as TStr)
+        + quotedStr((cbProfessor.Items.Objects[cbProfessor.ItemIndex] as TStr)
         .str) + ' AND codigoCurso = ' +
-        QuotedStr((cbCurso.Items.Objects[cbCurso.ItemIndex] as TStr).str) +
+        quotedStr((cbCurso.Items.Objects[cbCurso.ItemIndex] as TStr).str) +
         ' ORDER BY periodo, disciplina');
       Open;
 
@@ -155,6 +168,11 @@ begin
     vExcel.Columns['AZ:BC'].ColumnWidth := 3.57;
     vExcel.Columns['BD:BD'].ColumnWidth := 4.71;
     vExcel.Columns['BE:BE'].ColumnWidth := 4.14;
+
+    // altura das linhas
+    vExcel.Rows['1:5'].RowHeight := 12.75;
+    vExcel.Rows['6'].RowHeight := 11.25;
+    vExcel.Rows['7'].RowHeight := 9.75;
 
     // textos estáticos
     vData := vExcel.Range['K1'];
@@ -255,6 +273,14 @@ begin
     vData.Font.Bold := True;
     vData.Cells.HorizontalAlignment := 3;
 
+    vData := vExcel.Range['BD6'];
+    vData.Value := 'Média';
+    vData.Cells.HorizontalAlignment := 3;
+
+    vData := vExcel.Range['BE6'];
+    vData.Value := 'Freq Parc';
+    vData.Cells.HorizontalAlignment := 3;
+
     for I := 1 to 48 do
     begin
       vExcel.Cells[5, I + 2].Value := I; // linha, coluna
@@ -263,24 +289,52 @@ begin
     with DM.ADOBD do
     begin
       SQL.Clear;
-      SQL.Add('SELECT codigoCurso, codigoDisciplina disc, periodo FROM DTurma WHERE codigoTurma = ' + QuotedStr((lsbTurma.Items.Objects[lsbTurma.ItemIndex] as TStr).str) +  ' ');
+      SQL.Add('SELECT codigoCurso, codigoProfessor, codigoDisciplina disc, periodo FROM DTurma WHERE codigoTurma = '
+        + quotedStr((lsbTurma.Items.Objects[lsbTurma.ItemIndex] as TStr)
+        .str) + ' ');
       Open;
 
       while not Eof do
       begin
-        vExcel.Range['B3'].Value := FieldByName('codigoCurso').AsString + ' - ' + pegarNomeBD('DCurso', FieldByName('codigoCurso').AsString);
+        vExcel.Range['B3'].Value := FieldByName('codigoCurso').AsString + ' - '
+          + pegarNomeBD('DCurso', FieldByName('codigoCurso').AsString);
 
         vExcel.Range['B4'].Font.Bold := True;
-        vExcel.Range['B4'].Value := FieldByName('disc').AsString + ' - ' + pegarNomeBD('DDisciplina', FieldByName('disc').AsString);
+        vExcel.Range['B4'].Value := FieldByName('disc').AsString + ' - ' +
+          pegarNomeBD('DDisciplina', FieldByName('disc').AsString);
 
+        vExcel.Range['AP3'].NumberFormat := '@';
         vExcel.Range['AP3'].Font.Bold := True;
-        vExcel.Range['AP3'].Value := FieldByName('periodo').AsString + ' - 2014';
+        vExcel.Range['AP3'].Value := FieldByName('periodo').AsString +
+          ' / 2014';
 
-        vExcel.Range['AG4'].Value := pegarNomeBD('DProfessor', FieldByName('codigoProfessor').AsString);
+        vExcel.Range['AG4'].Value := pegarNomeBD('DProfessor',
+          FieldByName('codigoProfessor').AsString);
 
         Next;
       end;
       Close;
+
+      SQL.Clear;
+      SQL.Add('SELECT * FROM DDiario WHERE codigoTurma=' +
+        (lsbTurma.Items.Objects[lsbTurma.ItemIndex] as TStr).str);
+      Open;
+
+      I := 8;
+      while not Eof do
+      begin
+        vExcel.Cells[I, 1].Value := FieldByName('RA').AsString;
+        vExcel.Cells[I, 2].Value := pegarNomeAluno(FieldByName('RA').AsString);
+        vExcel.Cells[I, 51].Value := FieldByName('RA').AsString;
+        vExcel.Rows[I].RowHeight := 11.25;
+
+        if I mod 2 = 0 then
+          vExcel.Range['A' + IntToStr(I), 'BE' + IntToStr(I)].Interior.ColorIndex := 14;
+
+        Inc(I);
+
+        Next;
+      end;
 
     end;
 
