@@ -49,10 +49,18 @@ end;
 procedure TfrmDisciplina.btnIncluirClick(Sender: TObject);
 begin
   DM.ADOBD.SQL.Clear;
-  DM.ADOBD.SQL.Add('insert into DDisciplina values('+quotedStr(edCodigo.Text)+','+quotedStr(edNome.Text)+')');
-  Dm.ADOBD.execSQL;
-  showMessage('Disciplina incluída com sucesso');
-  atualizarLista;
+  DM.ADOBD.SQL.Add('select * from DDisciplina where codigo='+quotedStr(edCodigo.Text));
+  DM.ADOBD.Open;
+  if not(DM.ADOBD.eof) then
+   showMessage('Disciplina com tal código já existe')
+  else
+  begin
+    DM.ADOBD.SQL.Clear;
+    DM.ADOBD.SQL.Add('insert into DDisciplina values('+quotedStr(edCodigo.Text)+','+quotedStr(edNome.Text)+')');
+    Dm.ADOBD.execSQL;
+    showMessage('Disciplina incluída com sucesso');
+    atualizarLista;
+  end;
 end;
 
 procedure TfrmDisciplina.FormCreate(Sender: TObject);

@@ -49,10 +49,18 @@ end;
 procedure TfrmCurso.btnIncluirClick(Sender: TObject);
 begin
   DM.ADOBD.SQL.Clear;
-  DM.ADOBD.SQL.Add('insert into DCurso values('+quotedStr(edCodigo.Text)+','+quotedStr(edNome.Text)+')');
-  Dm.ADOBD.execSQL;
-  showMessage('Curso incluído com sucesso');
-  atualizarLista;
+  DM.ADOBD.SQL.Add('select * from DCurso where codigo='+quotedStr(edCodigo.Text));
+  DM.ADOBD.Open;
+  if not(DM.ADOBD.eof) then
+   showMessage('Curso com tal código já existe')
+  else
+  begin
+    DM.ADOBD.SQL.Clear;
+    DM.ADOBD.SQL.Add('insert into DCurso values('+quotedStr(edCodigo.Text)+','+quotedStr(edNome.Text)+')');
+    Dm.ADOBD.execSQL;
+    showMessage('Curso incluído com sucesso');
+    atualizarLista;
+  end;
 end;
 
 procedure TfrmCurso.FormCreate(Sender: TObject);

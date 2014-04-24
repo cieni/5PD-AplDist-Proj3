@@ -1,0 +1,71 @@
+unit UDisciplina;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, UDataModule;
+
+type
+  TfrmDisciplina = class(TForm)
+    lblCodigo: TLabel;
+    lblNome: TLabel;
+    edCodigo: TEdit;
+    edNome: TEdit;
+    btnIncluir: TButton;
+    lbDisciplinas: TListBox;
+    procedure btnIncluirClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+  private
+    procedure atualizarLista;
+  public
+    { Public declarations }
+  end;
+
+var
+  frmDisciplina: TfrmDisciplina;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmDisciplina.atualizarLista;
+var
+codigo, nome : String;
+begin
+  lbDisciplinas.Clear;
+  DM.ADOBD.SQL.Clear;
+  DM.ADOBD.SQL.Add('Select * from DDisciplina order by codigo');
+  DM.ADOBD.Open;
+  While not(DM.ADOBD.Eof) do
+  Begin
+    codigo:=DM.ADOBD.FieldByName('codigo').AsString;
+    nome:=DM.ADOBD.FieldByName('nome').AsString;
+    lbDisciplinas.Items.Add(codigo+' - '+nome);
+    DM.ADOBD.Next;
+  End;
+end;
+
+procedure TfrmDisciplina.btnIncluirClick(Sender: TObject);
+begin
+  DM.ADOBD.SQL.Clear;
+  DM.ADOBD.SQL.Add('select * from DCurso where codigo='+quotedStr(edCodigo.Text));
+  DM.ADOBD.Open;
+  if not(DM.ADOBD.eof) then
+   showMessage('Curso com tal código já existe')
+  else
+  begin
+  DM.ADOBD.SQL.Clear;
+  DM.ADOBD.SQL.Add('insert into DDisciplina values('+quotedStr(edCodigo.Text)+','+quotedStr(edNome.Text)+')');
+  Dm.ADOBD.execSQL;
+  showMessage('Disciplina incluída com sucesso');
+  atualizarLista;
+  end;
+end;
+
+procedure TfrmDisciplina.FormCreate(Sender: TObject);
+begin
+  atualizarLista;
+end;
+
+end.

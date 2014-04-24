@@ -49,10 +49,18 @@ end;
 procedure TfrmAluno.Button1Click(Sender: TObject);
 begin
   DM.ADOBD.SQL.Clear;
-  DM.ADOBD.SQL.Add('insert into DAluno values('+quotedStr(edRa.Text)+','+quotedStr(edNome.Text)+')');
-  Dm.ADOBD.execSQL;
-  showMessage('Aluno incluído com sucesso');
-  atualizarLista;
+  DM.ADOBD.SQL.Add('select * from DAluno where ra='+quotedStr(edRa.text));
+  Dm.ADOBD.Open;
+  if not(DM.ADOBD.Eof) then
+    showMessage('Aluno com tal RA já existe')
+  else
+  begin
+    DM.ADOBD.SQL.Clear;
+    DM.ADOBD.SQL.Add('insert into DAluno values('+quotedStr(edRa.Text)+','+quotedStr(edNome.Text)+')');
+    Dm.ADOBD.execSQL;
+    showMessage('Aluno incluído com sucesso');
+    atualizarLista;
+  end;
 end;
 
 procedure TfrmAluno.FormCreate(Sender: TObject);

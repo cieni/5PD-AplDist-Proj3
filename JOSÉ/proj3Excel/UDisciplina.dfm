@@ -44,7 +44,7 @@ object frmDisciplina: TfrmDisciplina
     Top = 8
     Width = 226
     Height = 21
-    MaxLength = 30
+    MaxLength = 50
     TabOrder = 1
   end
   object btnIncluir: TButton

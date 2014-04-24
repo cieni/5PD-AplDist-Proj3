@@ -28,6 +28,7 @@ type
     procedure urma1Click(Sender: TObject);
     procedure Dirio1Click(Sender: TObject);
     procedure Dirio2Click(Sender: TObject);
+    procedure Sair1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -91,6 +92,11 @@ procedure TfrmPrincipal.Professor1Click(Sender: TObject);
 begin
   Application.CreateForm(TfrmProfessor, frmProfessor);
   frmProfessor.Show;
+end;
+
+procedure TfrmPrincipal.Sair1Click(Sender: TObject);
+begin
+   Application.Terminate;
 end;
 
 procedure TfrmPrincipal.urma1Click(Sender: TObject);
