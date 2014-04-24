@@ -19,7 +19,7 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  TStyleManager.TrySetStyle('Cobalt XEMedia');
+  TStyleManager.TrySetStyle('Carbon');
   Application.CreateForm(TDM, DM);
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TfrmAluno, frmAluno);
