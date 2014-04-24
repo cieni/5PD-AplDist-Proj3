@@ -51,6 +51,7 @@ object frmAluno: TfrmAluno
     Font.Name = 'Shonar Bangla'
     Font.Style = []
     MaxLength = 5
+    NumbersOnly = True
     ParentFont = False
     TabOrder = 0
   end

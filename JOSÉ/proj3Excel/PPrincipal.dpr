@@ -11,7 +11,8 @@ uses
   UProfessor in 'UProfessor.pas' {frmProfessor},
   UTurma in 'UTurma.pas' {frmTurma},
   USelecionaTurma in 'USelecionaTurma.pas' {frmSelecionaTurma},
-  UDiario in 'UDiario.pas' {frmDiario};
+  UDiario in 'UDiario.pas' {frmDiario},
+  UAluno in 'UAluno.pas' {frmAluno};
 
 {$R *.res}
 
@@ -21,5 +22,6 @@ begin
   TStyleManager.TrySetStyle('Cobalt XEMedia');
   Application.CreateForm(TDM, DM);
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
+  Application.CreateForm(TfrmAluno, frmAluno);
   Application.Run;
 end.
