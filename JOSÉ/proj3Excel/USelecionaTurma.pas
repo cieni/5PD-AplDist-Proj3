@@ -160,6 +160,7 @@ begin
     // células giradas
     vExcel.Range['C5:AX5'].Font.Size := 9;
     vExcel.Range['C5:AX7'].Orientation := 90;
+    vExcel.Range['C5:AX7'].HorizontalAlignment := 3;
 
     // largura das colunas
     vExcel.Columns['A'].ColumnWidth := 5.86;
@@ -169,6 +170,10 @@ begin
     vExcel.Columns['AZ:BC'].ColumnWidth := 3.57;
     vExcel.Columns['BD:BD'].ColumnWidth := 4.71;
     vExcel.Columns['BE:BE'].ColumnWidth := 4.14;
+
+    // borda
+    vExcel.Range['C6:BE7'].Borders.LineStyle := -4118;
+    vExcel.Range['C6:BE7'].Borders.ColorIndex := 0;
 
     // altura das linhas
     vExcel.Rows['1:5'].RowHeight := 12.75;
@@ -199,6 +204,15 @@ begin
     vData := vExcel.Range['AM3'];
     vData.Font.Bold := True;
     vData.Value := 'Per:';
+
+    vData := vExcel.Range['A4:BE4'];
+    //vData.Borders.LineStyle := 1;   // borda contínua
+    vData.Borders[8].LineStyle := 1;    // borda todas: sem cor
+    vData.Borders[8].ColorIndex := 0;    // borda todas: sem cor
+    vData.Borders[9].LineStyle := 1;    // borda todas: sem cor
+    vData.Borders[9].ColorIndex := 0;    // borda todas: sem cor
+    //vData.Borders[8].ColorIndex := 0;   // borda topo       \__ preto
+    //vData.Borders[9].ColorIndex := 0;   // borda baixo      /
 
     // mesclagem de células
     vExcel.Range['AP3:AY3'].MergeCells := True;
@@ -273,14 +287,21 @@ begin
     vData.Value := 'RA';
     vData.Font.Bold := True;
     vData.Cells.HorizontalAlignment := 3;
+    vData.Cells.VerticalAlignment := 1;
+    vData.Font.Size := 12;
 
     vData := vExcel.Range['BD6'];
     vData.Value := 'Média';
     vData.Cells.HorizontalAlignment := 3;
+    vData.Cells.VerticalAlignment := 2;
+    vData.Font.Size := 8;
 
     vData := vExcel.Range['BE6'];
     vData.Value := 'Freq Parc';
     vData.Cells.HorizontalAlignment := 3;
+    vData.Cells.VerticalAlignment := 2;
+    vData.WrapText := True;
+    vData.Font.Size := 8;
 
     for I := 1 to 48 do
     begin
@@ -317,8 +338,7 @@ begin
       Close;
 
       SQL.Clear;
-      SQL.Add('SELECT * FROM DDiario WHERE codigoTurma=' +
-        (lsbTurma.Items.Objects[lsbTurma.ItemIndex] as TStr).str);
+      SQL.Add('SELECT * FROM DDiario WHERE codigoTurma=' + (lsbTurma.Items.Objects[lsbTurma.ItemIndex] as TStr).str + ' ORDER BY RA');
       Open;
 
       I := 8;
@@ -328,6 +348,8 @@ begin
         vExcel.Cells[I, 2].Value := pegarNomeAluno(FieldByName('RA').AsString);
         vExcel.Cells[I, 51].Value := FieldByName('RA').AsString;
         vExcel.Rows[I].RowHeight := 11.25;
+
+        //vExcel.Range['BE' + IntToStr(I)].Formula := '=countif(C' + IntToStr(I) + ', AX' + IntToStr(I) + ';".")';
 
         if I mod 2 = 0 then
           vExcel.Range['A' + IntToStr(I), 'BE' + IntToStr(I)
@@ -339,7 +361,12 @@ begin
       end;
 
       I := I - 1;
-      vExcel.Range['A8', 'BE' + IntToStr(I)].Font.Size := 10;
+
+      vData := vExcel.Range['A8', 'BE' + IntToStr(I)];
+      vData.Font.Size := 10;
+      vData.VerticalAlignment := 2;
+      vData.Borders.LineStyle := -4118;
+      vData.Borders.ColorIndex := 0;
     end;
 
     { for I := 1 to 30 do
