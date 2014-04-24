@@ -15,14 +15,14 @@ TNumero = class
   end;
 
   TfrmDiarios = class(TForm)
-    Label1: TLabel;
-    Label2: TLabel;
+    lblTurma: TLabel;
+    lblAluno: TLabel;
     lbDiarios : TListBox;
-    Button1: TButton;
+    btnIncluir: TButton;
     cbTurma: TComboBox;
     cbAluno: TComboBox;
     procedure FormCreate(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
+    procedure btnIncluirClick(Sender: TObject);
   private
     procedure atualizarLista;
     procedure atualizarComponentes;
@@ -70,7 +70,7 @@ begin
 end;
 
 
-procedure TfrmDiarios.Button1Click(Sender: TObject);
+procedure TfrmDiarios.btnIncluirClick(Sender: TObject);
 var
  codTurma, ra : String;
 begin

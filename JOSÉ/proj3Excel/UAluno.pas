@@ -8,13 +8,13 @@ uses
 
 type
   TfrmAluno = class(TForm)
-    Label1: TLabel;
-    Label2: TLabel;
+    lblRA: TLabel;
+    lblNome: TLabel;
     edRA: TEdit;
     edNome: TEdit;
-    Button1: TButton;
+    btnIncluir: TButton;
     lbAlunos: TListBox;
-    procedure Button1Click(Sender: TObject);
+    procedure btnIncluirClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
         procedure atualizarLista;
@@ -46,7 +46,7 @@ begin
   End;
 end;
 
-procedure TfrmAluno.Button1Click(Sender: TObject);
+procedure TfrmAluno.btnIncluirClick(Sender: TObject);
 begin
   DM.ADOBD.SQL.Clear;
   DM.ADOBD.SQL.Add('select * from DAluno where ra='+quotedStr(edRa.text));

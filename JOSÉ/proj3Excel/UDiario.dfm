@@ -1,9 +1,11 @@
 object frmDiarios: TfrmDiarios
   Left = 0
   Top = 0
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsSingle
   Caption = 'Di'#225'rio'
-  ClientHeight = 473
-  ClientWidth = 440
+  ClientHeight = 361
+  ClientWidth = 433
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,82 +13,53 @@ object frmDiarios: TfrmDiarios
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Visible = True
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
-  object Label1: TLabel
-    Left = 14
-    Top = 8
-    Width = 72
-    Height = 31
-    Caption = 'Turma :'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = 32
-    Font.Name = 'Shonar Bangla'
-    Font.Style = [fsBold]
-    ParentFont = False
+  object lblTurma: TLabel
+    Left = 8
+    Top = 11
+    Width = 34
+    Height = 13
+    Caption = 'Turma:'
   end
-  object Label2: TLabel
-    Left = 25
-    Top = 64
-    Width = 64
-    Height = 31
-    Caption = 'Aluno :'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = 32
-    Font.Name = 'Shonar Bangla'
-    Font.Style = [fsBold]
-    ParentFont = False
+  object lblAluno: TLabel
+    Left = 8
+    Top = 38
+    Width = 31
+    Height = 13
+    Caption = 'Aluno:'
   end
-  object Button1: TButton
-    Left = 144
-    Top = 104
-    Width = 121
-    Height = 30
-    Caption = 'Incluir'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -19
-    Font.Name = 'Shonar Bangla'
-    Font.Style = []
-    ParentFont = False
+  object btnIncluir: TButton
+    Left = 361
+    Top = 35
+    Width = 65
+    Height = 22
+    Caption = 'incluir'
     TabOrder = 0
-    OnClick = Button1Click
+    OnClick = btnIncluirClick
   end
   object lbDiarios: TListBox
     Left = 8
-    Top = 160
-    Width = 415
-    Height = 305
+    Top = 63
+    Width = 418
+    Height = 290
     ItemHeight = 13
     TabOrder = 1
   end
   object cbTurma: TComboBox
-    Left = 92
-    Top = 10
-    Width = 331
+    Left = 48
+    Top = 8
+    Width = 378
     Height = 21
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'Tahoma'
-    Font.Style = []
-    ParentFont = False
     TabOrder = 2
   end
   object cbAluno: TComboBox
-    Left = 95
-    Top = 66
-    Width = 193
-    Height = 26
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = 18
-    Font.Name = 'Tahoma'
-    Font.Style = []
-    ParentFont = False
+    Left = 45
+    Top = 35
+    Width = 310
+    Height = 21
     TabOrder = 3
   end
 end
